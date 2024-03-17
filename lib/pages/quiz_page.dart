@@ -21,8 +21,8 @@ class _QuizPageState extends State<QuizPage> {
         Alert(
                 // style: AlertStyle(),
                 context: context,
-                title: "All Questions Completed",
-                desc: "Quiz End Reached")
+                title: "Finished!",
+                desc: "You\'ve reached end of the Quiz")
             .show();
         quizBrain.reset();
         scoreKeeper.clear();
@@ -115,7 +115,7 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        // TODO: Add a Row here as your score keeper
+
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Padding(

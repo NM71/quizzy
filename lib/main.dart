@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quizzy/pages/quiz_page.dart';
-
+import 'package:theme_provider/theme_provider.dart';
 
 void main() => runApp(const Quizzy());
 
@@ -10,7 +10,7 @@ class Quizzy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  MaterialApp(
       theme: ThemeData(
         fontFamily: GoogleFonts.daiBannaSil().fontFamily,
       ),
@@ -22,7 +22,7 @@ class Quizzy extends StatelessWidget {
           actions: const [
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: Icon(Icons.logout,color: Colors.black,),
+              child: Icon(Icons.lightbulb,color: Colors.black,),
             ),
           ],
         ),
