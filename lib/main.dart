@@ -19,11 +19,17 @@ class Quizzy extends StatelessWidget {
         appBar: AppBar(
           title: const Text('G.K Quiz',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
           centerTitle: true,
-          actions: const [
+          actions:  [
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: Icon(Icons.lightbulb,color: Colors.black,),
-            ),
+              child: IconButton(
+                onPressed: () {
+                  // Define the action to be performed when the icon is pressed
+                  // For example, you can show a dialog, navigate to another screen, etc.
+                  print('Icon pressed!');
+                },
+                icon: Icon(Icons.lightbulb, color: Colors.black),
+              ),            ),
           ],
         ),
         drawer: const Drawer(),
