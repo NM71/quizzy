@@ -1,4 +1,6 @@
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quiz_brain.dart';
 
 class QuizPage extends StatefulWidget {
@@ -8,13 +10,47 @@ class QuizPage extends StatefulWidget {
   _QuizPageState createState() => _QuizPageState();
 }
 
-int questionNumber = 0;
 QuizBrain quizBrain = QuizBrain();
-bool correctAnswer = quizBrain.generalKnowledge[questionNumber].questionAnswer;
-
-List<Icon> scoreKeeper = [];
+// bool correctAnswer = quizBrain.getQuestionAnswer();
+List<Widget> scoreKeeper = [];
 
 class _QuizPageState extends State<QuizPage> {
+  void checkAnswer(bool userPickedAnswer) {
+    setState(() {
+      if (quizBrain.isFinished()) {
+        Alert(
+                // style: AlertStyle(),
+                context: context,
+                title: "All Questions Completed",
+                desc: "Quiz End Reached")
+            .show();
+        quizBrain.reset();
+        scoreKeeper.clear();
+      } else {
+        if (userPickedAnswer) {
+          scoreKeeper.add(Text(
+            'Q${quizBrain.questionNum()}: ',
+            style: const TextStyle(color: Colors.black),
+          ));
+          scoreKeeper.add(const Icon(
+            Icons.check,
+            color: Colors.green,
+          ));
+        } else {
+          scoreKeeper.add(Text(
+            'Q ${quizBrain.questionNum()}: ',
+            style: const TextStyle(color: Colors.black),
+          ));
+          scoreKeeper.add(const Icon(
+            Icons.close,
+            color: Colors.red,
+          ));
+        }
+        quizBrain.nextQuestion();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,11 +63,11 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.generalKnowledge[questionNumber].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -43,17 +79,10 @@ class _QuizPageState extends State<QuizPage> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green, // background
-                foregroundColor: Colors.white, // foreground
+                foregroundColor: Colors.black, // foreground
               ),
               onPressed: () {
-                if(correctAnswer == true) {
-                  scoreKeeper.add(const Icon(Icons.check,color: Colors.green,));
-                } else {
-                  scoreKeeper.add(const Icon(Icons.close,color: Colors.red,));
-                }
-                setState(() {
-                  questionNumber++;
-                });
+                checkAnswer(quizBrain.getQuestionAnswer());
               },
               child: const Text(
                 'True',
@@ -71,17 +100,10 @@ class _QuizPageState extends State<QuizPage> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red, // background
-                foregroundColor: Colors.white, // foreground
+                foregroundColor: Colors.black, // foreground
               ),
               onPressed: () {
-                if(correctAnswer == false) {
-                  scoreKeeper.add(const Icon(Icons.close,color: Colors.red,));
-                } else {
-                  scoreKeeper.add(const Icon(Icons.check,color: Colors.green,));
-                }
-                setState(() {
-                  questionNumber++;
-                });
+                checkAnswer(quizBrain.getQuestionAnswer());
               },
               child: const Text(
                 'False',
@@ -94,10 +116,14 @@ class _QuizPageState extends State<QuizPage> {
           ),
         ),
         // TODO: Add a Row here as your score keeper
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: scoreKeeper,
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: scoreKeeper,
+            ),
           ),
         )
       ],

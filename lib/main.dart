@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizzy/pages/home.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quizzy/pages/quiz_page.dart';
 
 
@@ -11,9 +11,24 @@ class Quizzy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: GoogleFonts.daiBannaSil().fontFamily,
+      ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.grey.shade900,
+        appBar: AppBar(
+          title: const Text('G.K Quiz',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+          centerTitle: true,
+          actions: const [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.logout,color: Colors.black,),
+            ),
+          ],
+        ),
+        drawer: const Drawer(),
+
+        backgroundColor: Colors.white,
         body: const SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -21,6 +36,7 @@ class Quizzy extends StatelessWidget {
           ),
         ),
       ),
+
       // routes: {
       //   '/home': (context) => HomePage(),
       //   '/quizPage': (context) => QuizPage(),
