@@ -1,6 +1,5 @@
 import 'package:quizzy/pages/question.dart';
 
-
 class QuizBrain {
   int _questionNumber = 0;
 
@@ -30,23 +29,41 @@ class QuizBrain {
     Question(
         'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
         true),
+    Question(
+        'The term "chinaman" refers to a type of delivery bowled by a left-arm orthodox spinner.',
+        true),
+    Question(
+        'A "diamond duck" in cricket occurs when a batsman is dismissed without facing a ball.',
+        true),
+    Question('The cricketing term "LBW" stands for Leg Before Wicket.', true),
+    Question(
+        'The highest individual score by a batsman in Test cricket is 400 runs.',
+        true),
+    Question(
+        'A "double hat-trick" in cricket refers to a bowler taking six wickets in six consecutive deliveries.',
+        true),
+    Question(
+        'The term "Yorker" in cricket refers to a delivery bowled at or near the batsman\'s feet.',
+        true),
+    Question(
+        'In cricket, a "doosra" is a type of delivery bowled by a leg-spinner.',
+        false),
+    Question(
+        'The "Duckworth-Lewis" method is used in cricket to calculate target scores in rain-affected matches.',
+        true),
+    Question(
+        'The longest format of cricket is commonly referred to as "Limited Overs Cricket."',
+        false),
+    Question('A cricket match can end in a tie.', true),
+    Question('A "silly mid-off" is a fielding position in cricket.', true),
+    Question(
+        'The term "Gully" in cricket refers to a type of delivery bowled by a fast bowler.',
+        false),
+    Question(
+        'A "bouncer" in cricket is a delivery aimed at the batsman\'s head.',
+        true),
+    Question('The ICC Cricket World Cup is held every three years.', false),
   ];
-  // List<Question> _cricketQuestions = [
-  //   Question('The term "chinaman" refers to a type of delivery bowled by a left-arm orthodox spinner.', true),
-  //   Question('A "diamond duck" in cricket occurs when a batsman is dismissed without facing a ball.', true),
-  //   Question('The cricketing term "LBW" stands for Leg Before Wicket.', true),
-  //   Question('The highest individual score by a batsman in Test cricket is 400 runs.', true),
-  //   Question('A "double hat-trick" in cricket refers to a bowler taking six wickets in six consecutive deliveries.', true),
-  //   Question('The term "Yorker" in cricket refers to a delivery bowled at or near the batsman\'s feet.', true),
-  //   Question('In cricket, a "doosra" is a type of delivery bowled by a leg-spinner.', false),
-  //   Question('The "Duckworth-Lewis" method is used in cricket to calculate target scores in rain-affected matches.', true),
-  //   Question('The longest format of cricket is commonly referred to as "Limited Overs Cricket."', false),
-  //   Question('A cricket match can end in a tie.', true),
-  //   Question('A "silly mid-off" is a fielding position in cricket.', true),
-  //   Question('The term "Gully" in cricket refers to a type of delivery bowled by a fast bowler.', false),
-  //   Question('A "bouncer" in cricket is a delivery aimed at the batsman\'s head.', true),
-  //   Question('The ICC Cricket World Cup is held every three years.', false),
-  // ];
 
   int questionNum() {
     return _questionNumber + 1;
@@ -72,11 +89,13 @@ class QuizBrain {
     if (_questionNumber + 1 == _questionBank.length) {
       // print('Quiz End Reached');
       return true;
+    } else {
+      return false;
     }
-    else {return false;}
   }
 
   void reset() {
     _questionNumber = 0;
   }
+
 }
